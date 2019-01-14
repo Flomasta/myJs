@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.gallery{
+    width: 700px;
+
+
+    margin: 0 auto;
+}
+.gallery .photos{
+    position: relative;
+    height: 420px;
+}
+.gallery .photos img{
+    width: 100%;
+    position:absolute;
+    margin-bottom: 30px;
+    height: 400px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+.gallery .photos .showed{
+    opacity: 1;
+
+}

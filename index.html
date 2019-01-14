@@ -7,7 +7,46 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+
+<div class="gallery">
+    <div class="photos">
+        <img src="img/zf2BZQmk-580.jpg" height="436" width="580" class="showed"/>
+        <img src="img/1100345114.jpg" height="340" width="600"/>
+        <img src="img/287828.jpg" height="336" width="699"/>
+    </div>
+    <div class="buttons">
+        <input type="button" class="prev" value="Назад">
+        <input type="button" class="next" value="Вперёд">
+    </div>
+</div>
+
+
 <script>
+    //простая галерея
+    var prev = document.querySelector('.prev');
+    var next = document.querySelector('.next');
+    var images = document.querySelectorAll('.gallery .photos img');
+    var i = 0;
+    next.onclick = function () {
+        images[i].className ='';
+        i++;
+        if (i >= images.length){
+            i = 0;
+        }
+        images[i].className ='showed';
+    }
+    prev.onclick = function () {
+        images[i].className ='';
+        i--;
+        if (i < 0){
+            i = images.length - 1;
+        }
+        images[i].className ='showed';
+    }
+
+
+
+
     //генератор оскорблений
     var bodyPart = ["глаз", "нос", "череп", "макушка", "палец"];
     var adjective = ["вонючий", "унылый", "дурацкий"];
@@ -19,11 +58,10 @@
     var randomAnimal = animal[Math.floor(Math.random() * animal.length)];
     var statement = ["У тебя", randomBodyPart, "ещё более", randomAdjective, ",чем", randomAnimalPart, "у", randomAnimal].join(" ");
 
-    //задача №4: при помощи Join превратить массив в строку.
-    var a = [3,2,1];
-    var result = [a.shift(), "больше, чем", a.shift(), "больше, чем,",a.shift(),"?"].join(" ");
-    alert(result);
-
+    //задача №4: при п
+    var a = [3, 2, 1];
+    var result = [a.shift(), "больше, чем", a.shift(), "больше, чем,", a.shift(), "?"].join(" ");
+    // alert(result);
 
 
 </script>
