@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Attempts</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<script>
+    //генератор оскорблений
+    var bodyPart = ["глаз", "нос", "череп", "макушка", "палец"];
+    var adjective = ["вонючий", "унылый", "дурацкий"];
+    var animalPart = ["хвост", "копыто", "грива", "рог"];
+    var animal = ["кабана", "быка", "слона", "единорога"];
+    var randomBodyPart = bodyPart[Math.floor(Math.random() * bodyPart.length)];
+    var randomAdjective = adjective[Math.floor(Math.random() * adjective.length)];
+    var randomAnimalPart = animalPart[Math.floor(Math.random() * animalPart.length)];
+    var randomAnimal = animal[Math.floor(Math.random() * animal.length)];
+    var statement = ["У тебя", randomBodyPart, "ещё более", randomAdjective, ",чем", randomAnimalPart, "у", randomAnimal].join(" ");
+
+    //задача №4: при помощи Join превратить массив в строку.
+    var a = [3,2,1];
+    var result = [a.shift(), "больше, чем", a.shift(), "больше, чем,",a.shift(),"?"].join(" ");
+    alert(result);
+
+
+
+</script>
+</body>
+</html>
