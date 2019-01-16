@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Attempts</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<h1>Игра виселица</h1>
+<a href="index.html">На главную</a>
+<script>
+    // пример работы prompt и confirm
+// var name = prompt('Как вас зовут?');
+// console.log('Привет, '+ name);
+//
+// var likeCats= confirm('Тебе нравятся кошки?');
+// if (likeCats){
+//     console.log('Вандефул!');
+// }
+// else {
+//     console.log('Что-то пошло не так...');
+// }
+
+    //Игра
+
+    //задаём список слов
+    var words = ['программа','макака','прекрасный','оладушек'];
+    //выбираем произвольное слово из списка
+    var word = words[Math.floor(Math.random()*words.length)];
+    var answerArray = [];
+    //разбиваем слово на буквы и заменяем их на подчёркивания
+    for (i = 0; i < word.length; i++){
+        answerArray[i] = "_";
+    }
+    var remainingLetters = word.length;
+    //игровой цикл
+    while(remainingLetters > 0){
+        alert(answerArray.join(' '));
+        //запрашиваем данные
+        var guess = prompt('Введите букву или нажмите отмена');
+        //проверка, что данные введены
+        if (guess === null){
+            break
+            //проверка, что введён только один символ
+        }else if (guess.length !== 1){
+            alert('Нужно ввести только одну букву!');
+        }else{
+            //обновляем состояние игры
+            for (var a = 0; a < word.length; a++){
+                //поправил баг игры, по умолчанию в книге указан ответ без доп.условия
+                //при многократном вводе одной и той же буквы показывался через какое то кол-во нажатий показывался правильный ответ
+                //т.е уменьшалось количество оставшихся букв.
+                if(word[a] === guess && answerArray[a] === '_' ){
+                    answerArray[a] = guess;
+                    remainingLetters--;
+                }
+            }
+        }
+    }
+    alert(answerArray.join(""));
+    alert("Отлично! Было загадано слово " + word);
+</script>
+</body>
+</html>
