@@ -35,11 +35,15 @@
         answerArray[i] = "_";
     }
     var remainingLetters = word.length;
+    var attempts = 30;
     //игровой цикл
     while(remainingLetters > 0){
+        if (attempts > 0){
+        attempts--;
         alert(answerArray.join(' '));
         //запрашиваем данные
         var guess = prompt('Введите букву или нажмите отмена');
+            guess = guess.toLowerCase();
         //проверка, что данные введены
         if (guess === null){
             break
@@ -55,8 +59,13 @@
                 if(word[a] === guess && answerArray[a] === '_' ){
                     answerArray[a] = guess;
                     remainingLetters--;
+                    console.log(attempts);
                 }
             }
+        }
+        }else {
+            alert('У вас закончились попытки');
+            break;
         }
     }
     alert(answerArray.join(""));
