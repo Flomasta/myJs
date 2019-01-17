@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Attempts</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<h1>Глава 8.Функции.</h1>
+<a href="index.html">На главную</a><br/>
+
+<script>
+    //рисуем котиков
+    var drawCat = function (howManyTimes) {
+        for (i = 0; i < howManyTimes; i++) {
+            console.log((i + 1) + ' ' + '=^.^=');
+        }
+    };
+
+    //задание 1
+    function multiple(var1, var2) {
+        var result = var1 * var2;
+        return result;
+    }
+
+    function sum(var3, var4) {
+        var total = var3 + var4;
+        return total;
+    }
+
+    console.log(sum(multiple(36325, 9824), 777));
+
+    //задание 2
+
+    var randDigitsSetOne = [1, 2, 3];
+    var randDigitsSetTwo = [1, 2, 3];
+    var randDigitsSetThree = [2, 4, 5];
+    var randDigitsSetFour = [1, 2, 3, 4, 5];
+
+    function areArraysSame(arr1, arr2) {
+        if (arr1.length !== arr2.length) {
+            return false;
+        }
+        for (var b = 0; b < arr1.length; b++) {
+            if (arr1[b] !== arr2[b]) {
+                return false;
+            }
+        }
+        return true;
+    };
+
+
+    //задание 3
+    var pickWord = function () {
+        var words = ['программа', 'макака', 'прекрасный', 'оладушек'];
+        //выбираем произвольное слово из списка
+        return words[Math.floor(Math.random() * words.length)];
+    };
+    var setupAnswerArray = function (word) {
+        // Возвращает итоговый массив для заданного слова word
+        var answerArray = [];
+        for (i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        }
+        return answerArray;
+    };
+
+    var showPlayerProgress = function (answerArray) {
+        // С помощью alert отображает текущее состояние игры
+        alert(answerArray.join(' '));
+    };
+
+    var getGuess = function () {
+        // Запрашивает ответ игрока с помощью prompt
+        return prompt('Введите букву или нажмите отмена');
+    };
+
+    var updateGameState = function (guess, word, answerArray) {
+        // Обновляет answerArray согласно ответу игрока (guess)
+        // возвращает число, обозначающее, сколько раз буква guess
+        // встречается в слове, чтобы можно было обновить значение
+        // remainingLetters
+        var appearances = 0;
+        for (var j = 0; j < word.length; j++) {
+            if (word[j] === guess && answerArray[j] === '_') {
+                answerArray[j] = guess;
+                appearances++;
+            }
+        }
+
+        return appearances;
+    };
+
+    var showAnswerAndCongratulatePlayer = function (answerArray) {
+        // С помощью alert показывает игроку отгаданное слово
+        // и поздравляет его с победой
+        showPlayerProgress(answerArray);
+        alert("Отлично! Было загадано слово " + answerArray.join(""));
+    };
+
+    // word: загаданное слово
+    var word = pickWord();
+    // answerArray: итоговый массив
+    var answerArray = setupAnswerArray(word);
+    // remainingLetters: сколько букв осталось угадать
+    var remainingLetters = word.length;
+    //колличество попыток
+    var attempts = 30;
+    while (remainingLetters > 0) {
+        if (attempts > 0) {
+            attempts--;
+            showPlayerProgress(answerArray);
+            // guess: ответ игрока
+            var guess = getGuess();
+            if (guess === null) {
+                break;
+            } else if (guess.length !== 1) {
+                alert("Пожалуйста, введите одиночную букву.");
+            } else {
+                // correctGuesses: количество открытых букв
+                var correctGuesses = updateGameState(guess, word, answerArray);
+                remainingLetters -= correctGuesses;
+            }
+        } else {
+            alert('У вас закончились попытки');
+            alert("Было загадано слово " + word);
+            break;
+        }
+
+    }
+
+    showAnswerAndCongratulatePlayer(answerArray);
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
