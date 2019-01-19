@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Перемещение мышки</title>
+</head>
+<body>
+<h1 id="heading">Привет, мир!</h1>
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script>
+    //  $("html").mousemove(function (event) {
+    // $("#heading").offset({
+    //     left: event.pageX,
+    //     top: event.pageY
+    // });
+    //  });
+    //задание 1
+
+    // $("html").click(function (event) {
+    //     $("#heading").offset({
+    //         left: event.pageX,
+    //         top: event.pageY
+    //     });
+    // });
+
+    //задание 2
+
+    var direction = 'right';
+    var offset = 0;
+
+    function moving() {
+        if (direction === 'right') {
+            $('#heading').offset({left: offset});
+            offset++;
+            if (offset > 200) {
+                offset = 0;
+                direction = 'down';
+            }
+
+        }
+        else if (direction === 'down') {
+            $('#heading').offset({top: offset});
+            offset++;
+            if (offset > 200) {
+                offset = 200;
+                direction = 'left';
+            }
+        }
+        else if (direction === 'left') {
+            $('#heading').offset({left: offset});
+            offset--;
+            if (offset < 0) {
+                offset = 200;
+                direction = 'top';
+            }
+        }
+        else if (direction === 'top') {
+            $('#heading').offset({top: offset});
+            offset--;
+            if (offset < 0) {
+                offset = 0;
+                direction = 'right';
+            }
+        }
+
+    };
+    var interval = 110;
+    var clicks = 0;
+    var intervalId  = setInterval(moving, interval);
+
+    $('#heading').click(function () {
+        clearInterval(intervalId);
+        clicks++;
+        interval /=2;
+
+        if (clicks > 10){
+           $('#heading').text('Стоп-машина!');
+
+        }else {
+
+            intervalId  = setInterval(moving, interval);
+        }
+
+
+});
+
+
+
+
+
+    //задание 3
+
+
+</script>
+</body>
+</html>

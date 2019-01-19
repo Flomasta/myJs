@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JS Attempts</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<h1 id="main-heading">Привет, DOM!=)</h1>
+<div id="cube" style="width: 300px; height: 300px; background-color: yellow;"></div>
+<script>
+    // var headingElement = document.getElementById('main-heading');
+    // console.log(headingElement.innerHTML);
+    // var newHeading = prompt('Введите новый текст');
+    // headingElement.innerHTML = newHeading;
+    //
+    // var newHeadingText = prompt('Введите новый заголовок');
+    // $('#main-heading').text(newHeadingText);
+    //
+    // #1. Перечислите своих друзей (и сделайте их лучшими!)
+    //
+    // var names = ['John', 'Gendolf', 'Harry', 'Duke'];
+    // $("#main-heading").text('Мои друзья').fadeIn(2000);
+    //
+    // for (var i = 0; i < names.length; i++) {
+    //     $('body').append('<p>' + names[i] + '</p>');
+    //     $("p").last().hide().fadeIn(1000 * (i + 2));
+    // }
+    // $('p').append(' лучший!');
+
+//#2. Мигающий заголовок
+// for (var j = 0; j < 5; j++){
+//     $('h1').fadeOut().fadeIn(1000 * j);
+// }
+
+//#3. Отложенная анимация
+$("#cube").fadeOut(1000).delay(5000).fadeIn(1000);
+
+    //#4. Метод fadeTo()
+    $("h1").fadeTo(2000, 0.5); //полупрозрачность
+
+var counter = 5;
+    var printMsg = function () {
+        console.log('Этот текст появился через ' + counter + ' секунд');
+        counter += 5;
+
+    }
+    var intervalId = function () {
+        setInterval(printMsg,5000);
+    }
+    intervalId();
+</script>
+</body>
+</html>
