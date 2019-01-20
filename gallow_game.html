@@ -10,66 +10,68 @@
 <h1>Глава 7.Игра виселица.</h1>
 <a href="index.html">На главную</a><br/>
 <a href="gallow_game.html">Сыграть ещё раз</a>
+
 <script>
     // пример работы prompt и confirm
-// var name = prompt('Как вас зовут?');
-// console.log('Привет, '+ name);
-//
-// var likeCats= confirm('Тебе нравятся кошки?');
-// if (likeCats){
-//     console.log('Вандефул!');
-// }
-// else {
-//     console.log('Что-то пошло не так...');
-// }
+    // var name = prompt('Как вас зовут?');
+    // console.log('Привет, '+ name);
+    //
+    // var likeCats= confirm('Тебе нравятся кошки?');
+    // if (likeCats){
+    //     console.log('Вандефул!');
+    // }
+    // else {
+    //     console.log('Что-то пошло не так...');
+    // }
 
     //Игра
 
     //задаём список слов
-    var words = ['программа','макака','прекрасный','оладушек'];
+    var words = ['программа', 'макака', 'прекрасный', 'оладушек'];
     //выбираем произвольное слово из списка
-    var word = words[Math.floor(Math.random()*words.length)];
+    var word = words[Math.floor(Math.random() * words.length)];
     var answerArray = [];
     //разбиваем слово на буквы и заменяем их на подчёркивания
-    for (i = 0; i < word.length; i++){
+    for (i = 0; i < word.length; i++) {
         answerArray[i] = "_";
     }
     var remainingLetters = word.length;
     var attempts = 30;
     //игровой цикл
-    while(remainingLetters > 0){
-        if (attempts > 0){
-        attempts--;
-        alert(answerArray.join(' '));
-        //запрашиваем данные
-        var guess = prompt('Введите букву или нажмите отмена');
+    while (remainingLetters > 0) {
+        if (attempts > 0) {
+            attempts--;
+            alert(answerArray.join(' '));
+            //запрашиваем данные
+            var guess = prompt('Введите букву или нажмите отмена');
             guess = guess.toLowerCase();
-        //проверка, что данные введены
-        if (guess === null){
-            break
-            //проверка, что введён только один символ
-        }else if (guess.length !== 1){
-            alert('Нужно ввести только одну букву!');
-        }else{
-            //обновляем состояние игры
-            for (var a = 0; a < word.length; a++){
-                //поправил баг игры, по умолчанию в книге указан ответ без доп.условия
-                //при многократном вводе одной и той же буквы показывался через какое то кол-во нажатий показывался правильный ответ
-                //т.е уменьшалось количество оставшихся букв.
-                if(word[a] === guess && answerArray[a] === '_' ){
-                    answerArray[a] = guess;
-                    remainingLetters--;
-                    console.log(attempts);
+            //проверка, что данные введены
+            if (guess === null) {
+                break
+                //проверка, что введён только один символ
+            } else if (guess.length !== 1) {
+                alert('Нужно ввести только одну букву!');
+            } else {
+                //обновляем состояние игры
+                for (var a = 0; a < word.length; a++) {
+                    //поправил баг игры, по умолчанию в книге указан ответ без доп.условия
+                    //при многократном вводе одной и той же буквы показывался через какое то кол-во нажатий показывался правильный ответ
+                    //т.е уменьшалось количество оставшихся букв.
+                    if (word[a] === guess && answerArray[a] === '_') {
+                        answerArray[a] = guess;
+                        remainingLetters--;
+                    }
                 }
             }
-        }
-        }else {
+        } else {
             alert('У вас закончились попытки');
             break;
         }
     }
     alert(answerArray.join(""));
     alert("Отлично! Было загадано слово " + word);
+
+
 </script>
 </body>
 </html>

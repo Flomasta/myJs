@@ -9,7 +9,7 @@
 <body>
 <h1>Глава 8.Функции.</h1>
 <a href="index.html">На главную</a><br/>
-
+<canvas id="canvas" width="900" height="900"></canvas>
 <script>
     //рисуем котиков
     var drawCat = function (howManyTimes) {
@@ -75,7 +75,6 @@
         // Запрашивает ответ игрока с помощью prompt
         return prompt('Введите букву или нажмите отмена');
     };
-
     var updateGameState = function (guess, word, answerArray) {
         // Обновляет answerArray согласно ответу игрока (guess)
         // возвращает число, обозначающее, сколько раз буква guess
@@ -98,7 +97,25 @@
         showPlayerProgress(answerArray);
         alert("Отлично! Было загадано слово " + answerArray.join(""));
     };
+    var drawMan = function (wrongAnswers) {
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        context.lineWidth = 3;
+        if (wrongAnswers === 0) {
+            context.fillRect(50, 50, 50, 50);
+        } else if (wrongAnswers === 1) {
+            context.fillRect(70, 80, 10, 40);
+        } else if (wrongAnswers === 2) {
+            context.fillRect(10, 120, 130, 10);
+        }else if (wrongAnswers === 3) {
+            context.fillRect(35, 130, 75, 75);
+        }else if (wrongAnswers === 4) {
+            context.fillRect(35, 195, 10, 130);
+        }else if (wrongAnswers === 5) {
+            context.fillRect(100, 195, 10, 130);
+        }
 
+    };
     // word: загаданное слово
     var word = pickWord();
     // answerArray: итоговый массив
@@ -107,6 +124,7 @@
     var remainingLetters = word.length;
     //колличество попыток
     var attempts = 30;
+    var wrongAnswers = 0;
     while (remainingLetters > 0) {
         if (attempts > 0) {
             attempts--;
@@ -121,6 +139,10 @@
                 // correctGuesses: количество открытых букв
                 var correctGuesses = updateGameState(guess, word, answerArray);
                 remainingLetters -= correctGuesses;
+                if (correctGuesses === 0) {
+                    drawMan(wrongAnswers);
+                    wrongAnswers++;
+                }
             }
         } else {
             alert('У вас закончились попытки');
