@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas</title>
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+</head>
+<body>
+<canvas id="canvas" width="900" height="900"></canvas>
+<script>
+
+    // Здесь будет JavaScript-код
+    var canvas = document.getElementById('canvas');
+
+    /* getContext - Контекст рисования — это JavaScript-объект, обладающий методами и свойствами, при помощи которых
+     можно рисовать на «холсте». Чтобы получить этот объект,
+         мы вызываем для canvas метод getContext, передавая
+     ему строку "2d", — это означает, что мы собираемся формировать на «холсте» двухмерное изображение.*/
+
+    var context = canvas.getContext('2d');
+    // for (var i = 0; i < 8; i++) {
+    //     context.fillRect(i * 10, i * 10, 10, 10);
+    // }
+
+    //Задание промежуточное
+    var head = context.fillRect(50, 50, 50, 50);
+    var neck = context.fillRect(70, 80, 10, 40);
+    var hand = context.fillRect(10, 120, 130, 10);
+    var body = context.fillRect(35, 130, 75, 75);
+    var legL = context.fillRect(35, 195, 10, 130);
+    var legR = context.fillRect(100, 195, 10, 130);
+    var ctx = canvas.getContext('2d');
+
+
+    var circle = function (x, y, radius, fillCircle) {
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+        if (fillCircle) {
+            ctx.fill();
+        } else {
+            ctx.stroke();
+        }
+
+    };
+
+    function drawSnowman(x, y) {
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "Black";
+
+
+        circle(x + 300, y + 300, 40, false);
+        circle(x + 300, y + 400, 60, false);
+        circle(x + 285, y + 290, 7, true);
+        circle(x + 315, y + 290, 7, true);
+        circle(x + 300, y + 370, 7, true);
+        circle(x + 300, y + 400, 7, true);
+        circle(x + 300, y + 430, 7, true);
+        ctx.fillStyle = "Orange";
+        circle(x + 300, y + 305, 7, true);
+    }
+
+    drawSnowman(50, 50);
+
+
+    var points = [[50, 50], [50, 100], [100, 100], [100, 50], [50, 50]];
+    var mysteryPoints = [[50, 50], [50, 100], [25, 120], [100, 50],
+        [70, 90], [100, 90], [70, 120]];
+    function drawPoints(points) {
+        ctx.strokeStyle = "Blue";
+        ctx.beginPath();
+        ctx.moveTo(points[0][0], points[0][1]);
+
+        for (i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i][0], points[i][1]);
+        }
+        ctx.stroke();
+    };
+
+    drawPoints(points);
+    drawPoints(mysteryPoints);
+
+$('canvas').mousemove(function (event) {
+    circle(event.pageX,event.pageY,3,true);
+
+});
+
+
+</script>
+</body>
+</html>
