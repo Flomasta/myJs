@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Summator</title>
+    <style>
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+
+        input {
+            width: 150px;
+            height: 70px;
+            text-align: center;
+        }
+
+        .data {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .res {
+            width: 150px;
+            height: 74px;
+            border: 1px gray solid;
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+    </style>
+    <script>
+        window.onload = function (ev) {
+            var num1      = document.querySelector('input[name=number-1]');
+            var num2      = document.querySelector('input[name=number-2]');
+            var btnSum    = document.querySelector('input[name=sum]');
+            var btnMinus  = document.querySelector('input[name=minus]');
+            var btnMult   = document.querySelector('input[name=mult]');
+            var btnDivide = document.querySelector('input[name=divide]');
+            var result    = document.querySelector('.res');
+            var input     = document.querySelectorAll('input');
+
+
+
+            btnSum.onclick = function () {
+                var res = parseInt(num1.value) + parseInt(num2.value);
+                result.innerHTML = res;
+                this.disabled = true;
+            };
+            btnMinus.onclick = function () {
+                var res = parseInt(num1.value) - parseInt(num2.value);
+                result.innerHTML = res;
+                this.disabled = true;
+            };
+            btnMult.onclick = function () {
+                var res = parseInt(num1.value) * parseInt(num2.value);
+                result.innerHTML = res;
+                this.disabled = true;
+            };
+            btnDivide.onclick = function () {
+                if (parseInt(num2.value) === 0){
+                result.innerHTML = 'Нельзя!';
+                }else{
+                    var res = parseInt(num1.value) / parseInt(num2.value);
+                    result.innerHTML = res;
+                    this.disabled = true;
+                }
+
+            };
+            var btnEnable = function () {
+                btnSum.disabled = false;
+                btnMinus.disabled = false;
+                btnMult.disabled = false;
+                btnDivide.disabled = false;
+            };
+            num1.oninput = btnEnable;
+            num2.oninput = btnEnable;
+        }
+    </script>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="data">
+        <div class="input_1"><input type="text" name="number-1"></div>
+        <div class="input_2"><input type="text" name="number-2"></div>
+        <div class="res"></div>
+    </div>
+    <div class="operations">
+        <div class="sum"><input type="button" value="+" name="sum"></div>
+        <div class="minus"><input type="button" value="-" name="minus"></div>
+        <div class="mult"><input type="button" value="*" name="mult"></div>
+        <div class="divide"><input type="button" value="/" name="divide"></div>
+    </div>
+
+</div>
+</body>
+</html>
