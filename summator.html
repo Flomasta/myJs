@@ -7,11 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Summator</title>
     <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .summator{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .wrapper {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             flex-direction: row;
+            width: 600px;
+            margin-top: 15px;
+
         }
 
         input {
@@ -24,18 +36,27 @@
             width: 100%;
             display: flex;
             justify-content: flex-start;
+            margin-bottom: 10px;
+            margin-left: 5px;
         }
 
         .res {
             width: 150px;
             height: 74px;
             border: 1px gray solid;
-            margin-left: 20px;
+            margin-left: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
 
         }
+        .operations{
+            display: flex;
+        }
+        .item{
+            margin-left: 5px;
+        }
+
     </style>
     <script>
         window.onload = function (ev) {
@@ -88,19 +109,20 @@
 </head>
 <body>
 
-<div class="wrapper">
+<div class="summator"><div class="wrapper">
     <div class="data">
         <div class="input_1"><input type="text" name="number-1"></div>
         <div class="input_2"><input type="text" name="number-2"></div>
         <div class="res"></div>
     </div>
     <div class="operations">
-        <div class="sum"><input type="button" value="+" name="sum"></div>
-        <div class="minus"><input type="button" value="-" name="minus"></div>
-        <div class="mult"><input type="button" value="*" name="mult"></div>
-        <div class="divide"><input type="button" value="/" name="divide"></div>
+        <div class="sum item"><input type="button" value="+" name="sum"></div>
+        <div class="minus item"><input type="button" value="-" name="minus"></div>
+        <div class="mult item"><input type="button" value="*" name="mult"></div>
+        <div class="divide item"><input type="button" value="/" name="divide"></div>
     </div>
 
+</div>
 </div>
 </body>
 </html>
