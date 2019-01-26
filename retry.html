@@ -10,7 +10,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(45deg, #D74177, #FFE98A) no-repeat;
+            background: linear-gradient(200deg, #F6EFD2, #CEAD78);
         }
 
         .summator {
@@ -36,7 +36,9 @@
             border-radius: 10px;
             outline: none;
             border: none;
-            background: #FFE98A;
+            background: #F6F5D2;
+            box-shadow: 0 0 10px rgba(134, 134, 122, 0.6);
+
         }
 
         .res {
@@ -55,15 +57,15 @@
 
         input[type="button"] {
 
-            border-bottom: #A67B2D 3px solid;
-            border-right: #A67B2D 3px solid;
+            border-bottom: #766F7C 3px solid;
+            border-right: #766F7C 3px solid;
             transition: all 0.1s;
         }
 
         input[type="button"]:active {
-            border-top: #A67B2D 3px solid;
-            border-left: #A67B2D 3px solid;
-            background: #FFD68A;
+            border-top: #766F7C 3px solid;
+            border-left: #766F7C 3px solid;
+            background: #EBE4C3;
             border-bottom: none;
             border-right: none;
         }
@@ -98,7 +100,7 @@
             content: '';
             width: 100%;
             height: 2px;
-            background-color: #3E815F;
+            background-color: #766F7C;
             position: absolute;
             top: 80px;
             text-align: center;
@@ -132,6 +134,7 @@
         .photos {
             position: relative;
             height: 600px;
+
         }
 
         img {
@@ -140,7 +143,7 @@
             position: absolute;
             left: 0;
             opacity: 0;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
             transition: opacity 1s;
 
         }
@@ -166,6 +169,8 @@
                 btnNext = document.querySelector('input[name = next]'),
                 btnPrev = document.querySelector('input[name = prev]'),
                 images = document.querySelectorAll('img'),
+                btnStop = document.querySelector('input[name = stop'),
+                btnStart = document.querySelector('input[name = start'),
                 i = 0;
 
 
@@ -218,8 +223,25 @@
                 }
                 images[i].classList.add('showed');
             };
-        }
 
+            var intervalId;
+
+
+            btnStop.onclick = function (){
+                clearInterval(intervalId);
+            };
+            btnStart.onclick = function () {
+                intervalId = setInterval(function () {
+                    images[i].classList.remove('showed');
+                    i++;
+                    if (i >= images.length) {
+                        i = 0;
+                    }
+                    images[i].classList.add('showed');
+                    console.log(i);
+                }, 2000);
+            }
+        };
 
     </script>
 </head>
@@ -253,7 +275,9 @@
                 <img src="img/_snowy_owl.jpg"/>
             </div>
             <div class="buttons"><input type="button" value="Предыдущая" name="prev" class="g-item">
-                <input type="button" value="Следующая" name="next" class="g-item"></div>
+                <input type="button" value="Следующая" name="next" class="g-item">
+                <input type="button" value="Start slide" name="start" class="g-item">
+                <input type="button" value="Stop!" name="stop" class="g-item"></div>
 
         </div>
     </div>
