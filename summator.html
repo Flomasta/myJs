@@ -7,15 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Summator</title>
     <style>
-        body{
+        body {
             margin: 0;
             padding: 0;
         }
-        .summator{
+
+        .summator {
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         .wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -50,25 +52,26 @@
             justify-content: center;
 
         }
-        .operations{
+
+        .operations {
             display: flex;
         }
-        .item{
+
+        .item {
             margin-left: 5px;
         }
 
     </style>
     <script>
         window.onload = function (ev) {
-            var num1      = document.querySelector('input[name=number-1]');
-            var num2      = document.querySelector('input[name=number-2]');
-            var btnSum    = document.querySelector('input[name=sum]');
-            var btnMinus  = document.querySelector('input[name=minus]');
-            var btnMult   = document.querySelector('input[name=mult]');
+            var num1 = document.querySelector('input[name=number-1]');
+            var num2 = document.querySelector('input[name=number-2]');
+            var btnSum = document.querySelector('input[name=sum]');
+            var btnMinus = document.querySelector('input[name=minus]');
+            var btnMult = document.querySelector('input[name=mult]');
             var btnDivide = document.querySelector('input[name=divide]');
-            var result    = document.querySelector('.res');
-            var input     = document.querySelectorAll('input');
-
+            var result = document.querySelector('.res');
+            var input = document.querySelectorAll('input');
 
 
             btnSum.onclick = function () {
@@ -87,9 +90,9 @@
                 this.disabled = true;
             };
             btnDivide.onclick = function () {
-                if (parseInt(num2.value) === 0){
-                result.innerHTML = 'Нельзя!';
-                }else{
+                if (parseInt(num2.value) === 0) {
+                    result.innerHTML = 'Нельзя!';
+                } else {
                     var res = parseInt(num1.value) / parseInt(num2.value);
                     result.innerHTML = res;
                     this.disabled = true;
@@ -109,20 +112,21 @@
 </head>
 <body>
 
-<div class="summator"><div class="wrapper">
-    <div class="data">
-        <div class="input_1"><input type="text" name="number-1"></div>
-        <div class="input_2"><input type="text" name="number-2"></div>
-        <div class="res"></div>
-    </div>
-    <div class="operations">
-        <div class="sum item"><input type="button" value="+" name="sum"></div>
-        <div class="minus item"><input type="button" value="-" name="minus"></div>
-        <div class="mult item"><input type="button" value="*" name="mult"></div>
-        <div class="divide item"><input type="button" value="/" name="divide"></div>
-    </div>
+<div class="summator">
+    <div class="wrapper">
+        <div class="data">
+            <div class="input_1"><input type="text" name="number-1"></div>
+            <div class="input_2"><input type="text" name="number-2"></div>
+            <div class="res"></div>
+        </div>
+        <div class="operations">
+            <div class="sum item"><input type="button" value="+" name="sum"></div>
+            <div class="minus item"><input type="button" value="-" name="minus"></div>
+            <div class="mult item"><input type="button" value="*" name="mult"></div>
+            <div class="divide item"><input type="button" value="/" name="divide"></div>
+        </div>
 
-</div>
+    </div>
 </div>
 </body>
 </html>

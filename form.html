@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Валидация формы</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            width: 1300px;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .forms {
+            background-color: beige;
+            width: 900px;
+            height: 210px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 25px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            box-shadow: 0px 5px 13px lightgray;
+        }
+
+        .txt, .btn {
+            outline: none;
+            border-radius: 13px;
+            border: 1px solid #A7AC9E;
+            background-color: #DDE5CD;
+        }
+
+        .txt {
+            height: 50px;
+            text-align: center;
+
+        }
+
+        .btn {
+            padding: 18px 35px;
+            background: #E2D0DA;
+            cursor: pointer;
+            margin-left: 10px;
+            border: 1px solid #93888E;
+        }
+
+        .red {
+            border: 1px solid red;
+        }
+
+        .message {
+            width: 100%;
+            text-align: center;
+            margin-top: -90px;
+            font-weight: bold;
+            color: #24241e;
+            font-size: 24px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="wrapper">
+    <div class="forms">
+
+        <form action="#">
+            <input class="txt" type="text" name="one" placeholder="введи текст">
+            <input class="txt" type="text" name="two" placeholder="или">
+            <input class="txt" type="text" name="three" placeholder="ты не пройдёшь!">
+            <input class="btn" type="submit" value="Отправить" name="btn">
+        </form>
+        <div class="message"></div>
+    </div>
+</div>
+
+<script>
+    window.onload = function (ev) {
+
+        var btn = document.querySelector('input[name=btn]');
+        var inpt = document.querySelectorAll('.txt');
+        var msg = document.querySelector('.message');
+        var error = false;
+        document.querySelector('form').onsubmit = function (e) {
+            for (i = 0; i < inpt.length; i++) {
+                if (inpt[i].value === '') {
+                    inpt[i].classList.add('red');
+                    msg.innerHTML = 'Заполните данные формы!';
+                    error = true;
+                } else {
+                    inpt[i].classList.remove('red');
+                }
+            }
+            if(error){
+                e.preventDefault();
+            }
+        }
+
+
+    }
+</script>
+</body>
+</html>
