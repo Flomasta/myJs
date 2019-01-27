@@ -190,7 +190,7 @@
                 this.disabled = true;
             }
             btnDivide.onclick = function () {
-                if (parseInt(num2.value) === 0) {
+                if (parseInt(num2.value)=== 0) {
                     res.innerHTML = 'Не можно!';
                 } else {
                     var divide = parseInt(num1.value) / parseInt(num2.value);
@@ -206,6 +206,7 @@
             }
             num1.oninput = btnEnable;
             num2.oninput = btnEnable;
+
 
             btnNext.onclick = function () {
                 images[i].classList.remove('showed')

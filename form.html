@@ -10,6 +10,11 @@
         body {
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: 100%;
+            background: peachpuff linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, .4) 50%
+            ) center center / 2em;
         }
 
         .wrapper {
@@ -17,6 +22,7 @@
             width: 1300px;
             display: flex;
             justify-content: center;
+
 
         }
 
@@ -28,9 +34,10 @@
             justify-content: center;
             align-items: center;
             border-radius: 25px;
-            margin-top: 10px;
+            margin-top: 300px;
             flex-wrap: wrap;
             box-shadow: 0px 5px 13px lightgray;
+
         }
 
         .txt, .btn {
@@ -74,9 +81,9 @@
     <div class="forms">
 
         <form action="#">
-            <input class="txt" type="text" name="one" placeholder="введи текст">
-            <input class="txt" type="text" name="two" placeholder="или">
-            <input class="txt" type="text" name="three" placeholder="ты не пройдёшь!">
+            <input class="txt" type="text" name="phone" placeholder="+7 999 99 99">
+            <input class="txt" type="text" name="email" placeholder="napishi@mne.ru">
+            <input class="txt" type="text" name="name" placeholder="Имя">
             <input class="btn" type="submit" value="Отправить" name="btn">
         </form>
         <div class="message"></div>
@@ -86,26 +93,24 @@
 <script>
     window.onload = function (ev) {
 
-        var btn = document.querySelector('input[name=btn]');
-        var inpt = document.querySelectorAll('.txt');
-        var msg = document.querySelector('.message');
-        var error = false;
-        document.querySelector('form').onsubmit = function (e) {
-            for (i = 0; i < inpt.length; i++) {
-                if (inpt[i].value === '') {
-                    inpt[i].classList.add('red');
-                    msg.innerHTML = 'Заполните данные формы!';
+        var txtInp = document.querySelectorAll('input[type = text]');
+        var btnSubmit = document.querySelector('form');
+
+
+        btnSubmit.onsubmit = function (e) {
+            var error = false;
+            for (i = 0; i < txtInp.length; i++) {
+                if (txtInp[i].value == '') {
+                    txtInp[i].classList.add('red');
                     error = true;
                 } else {
-                    inpt[i].classList.remove('red');
+                    txtInp[i].classList.remove('red');
                 }
             }
-            if(error){
+            if (error) {
                 e.preventDefault();
             }
         }
-
-
     }
 </script>
 </body>
