@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Summator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(200deg, #F6EFD2, #CEAD78);
+        }
+
+        .summator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-direction: row;
+            width: 900px;
+            margin-top: 15px;
+
+        }
+
+        input {
+            width: 150px;
+            height: 70px;
+            text-align: center;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            background: #F6F5D2;
+            box-shadow: 0 0 10px rgba(134, 134, 122, 0.6);
+
+        }
+
+        .res {
+            width: 150px;
+            height: 60px;
+            text-align: center;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+        }
+
+        input[type="text"] {
+            margin-left: 10px;
+            border: 1px gray solid;
+        }
+
+        input[type="button"] {
+
+            border-bottom: #766F7C 3px solid;
+            border-right: #766F7C 3px solid;
+            transition: all 0.1s;
+        }
+
+        input[type="button"]:active {
+            border-top: #766F7C 3px solid;
+            border-left: #766F7C 3px solid;
+            background: #EBE4C3;
+            border-bottom: none;
+            border-right: none;
+        }
+
+        .data {
+
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+            margin-left: 5px;
+        }
+
+        .res {
+            width: 150px;
+            height: 70px;
+            border: 1px gray solid;
+            margin-left: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .operations {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 70px;
+            position: relative;
+        }
+
+        .operations::after {
+            content: '';
+            width: 100%;
+            height: 2px;
+            background-color: #766F7C;
+            position: absolute;
+            top: 80px;
+            text-align: center;
+        }
+
+        .item {
+            margin-left: 5px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            width: 900px;
+            margin-top: 100px;
+            margin-bottom: 148px;
+
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .g-item {
+
+            margin-left: 10px;
+
+        }
+
+        .photos {
+            position: relative;
+            height: 600px;
+
+        }
+
+        img {
+            width: 900px;
+            height: 600px;
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            transition: opacity 1s;
+
+        }
+
+        .showed {
+
+            opacity: 1;
+        }
+
+
+    </style>
+    <script>
+
+        window.onload = function (ev) {
+            var
+                btnNext = document.querySelector('.gallery .buttons .next'),
+                btnPrev = document.querySelector('.gallery .buttons .prev'),
+                images = document.querySelectorAll('.gallery .photos img'),
+                btnStop = document.querySelector('input[name = stop'),
+                btnStart = document.querySelector('input[name = start');
+
+
+            var Gallery = function (images) {
+                i = 0;
+                this.images = images;
+                var intervalId;
+
+                this.next = function () {
+                    this.images[i].classList.remove('showed')
+                    i++;
+                    if (i >= this.images.length) {
+                        i = 0;
+                    }
+                    this.images[i].classList.add('showed');
+                };
+                this.prev = function () {
+                    this.images[i].classList.remove('showed');
+                    i--;
+                    if (i < 0) {
+                        i = this.images.length - 1;
+                    }
+                    this.images[i].classList.add('showed');
+                };
+                this.stop = function () {
+                    clearInterval(intervalId);
+                };
+
+                this.start = function () {
+                    intervalId = setInterval(function () {
+                        images[i].classList.remove('showed');
+                        i++;
+                        if (i >= images.length) {
+                            i = 0;
+                        }
+                        images[i].classList.add('showed');
+                    }, 2000);}
+
+            };
+
+            var slider = new Gallery(images);
+            btnNext.onclick = function () {
+                slider.next();
+            };
+            btnPrev.onclick = function () {
+                slider.prev();
+            };
+            btnStop.onclick = function () {
+                slider.stop();
+            };
+            btnStart.onclick = function () {
+                slider.start();
+            }
+
+
+        };
+
+    </script>
+</head>
+<body>
+
+<div class="summator">
+    <div class="wrapper">
+
+        <div class="gallery">
+
+            <div class="photos">
+                <img src="img/_look_out.jpg" class="showed"/>
+                <img src="img/zazen_and_nature.jpg"/>
+                <img src="img/sattelite.jpg"/>
+                <img src="img/pesnya_giperprostranstva.jpg"/>
+                <img src="img/on_the_horizon.jpg"/>
+                <img src="img/kosmicheskaya_gusenichka.jpg"/>
+                <img src="img/chelyabinskiy_meteor.jpg"/>
+                <img src="img/_snowy_owl.jpg"/>
+            </div>
+            <div class="buttons"><input type="button" value="Предыдущая" name="prev" class="g-item prev">
+                <input type="button" value="Следующая" name="next" class="g-item next">
+                <input type="button" value="Start slide" name="start" class="g-item">
+                <input type="button" value="Stop!" name="stop" class="g-item"></div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
