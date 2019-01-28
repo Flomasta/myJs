@@ -158,68 +158,79 @@
     </style>
     <script>
 
+
         window.onload = function (ev) {
-            var
-                btnNext = document.querySelector('.gallery .buttons .next'),
-                btnPrev = document.querySelector('.gallery .buttons .prev'),
-                images = document.querySelectorAll('.gallery .photos img'),
-                btnStop = document.querySelector('input[name = stop'),
-                btnStart = document.querySelector('input[name = start');
 
-
-            var Gallery = function (images) {
+            var Gallery = function (gallery) {
+                var gal = this;
+                gal.images = document.querySelectorAll(gallery.images);
+                gal.btnNext = document.querySelector(gallery.btnNext);
+                gal.btnPrev = document.querySelector(gallery.btnPrev);
+                gal.btnStop = document.querySelector(gallery.btnStop);
+                gal.btnStart = document.querySelector(gallery.btnStart);
+                gal.intervalId;
                 i = 0;
-                this.images = images;
-                var intervalId;
 
-                this.next = function () {
-                    this.images[i].classList.remove('showed')
+
+                function next() {
+                    gal.images[i].classList.remove('showed');
                     i++;
-                    if (i >= this.images.length) {
+                    if (i >= gal.images.length) {
                         i = 0;
                     }
-                    this.images[i].classList.add('showed');
-                };
-                this.prev = function () {
-                    this.images[i].classList.remove('showed');
+                    gal.images[i].classList.add('showed');
+                }
+
+                function prev() {
+                    gal.images[i].classList.remove('showed');
                     i--;
                     if (i < 0) {
-                        i = this.images.length - 1;
+                        i = gal.images.length - 1;
                     }
-                    this.images[i].classList.add('showed');
-                };
-                this.stop = function () {
-                    clearInterval(intervalId);
+                    gal.images[i].classList.add('showed');
                 };
 
-                this.start = function () {
-                    intervalId = setInterval(function () {
-                        images[i].classList.remove('showed');
+                function start() {
+                    gal.intervalId = setInterval(function () {
+                        gal.images[i].classList.remove('showed');
                         i++;
-                        if (i >= images.length) {
+                        if (i >= gal.images.length) {
                             i = 0;
                         }
-                        images[i].classList.add('showed');
-                    }, 2000);}
+                        gal.images[i].classList.add('showed');
+                        console.log(i);
+                    }, 2000);
+                };
 
-            };
-
-            var slider = new Gallery(images);
-            btnNext.onclick = function () {
-                slider.next();
-            };
-            btnPrev.onclick = function () {
-                slider.prev();
-            };
-            btnStop.onclick = function () {
-                slider.stop();
-            };
-            btnStart.onclick = function () {
-                slider.start();
-            }
+                function stop() {
+                    clearInterval(gal.intervalId);
+                };
 
 
-        };
+                gal.btnNext.onclick = next;
+                gal.btnPrev.onclick = prev;
+                gal.btnStart.onclick = start;
+                gal.btnStop.onclick = stop;
+            };
+
+
+            var slider1 = new Gallery({
+                images:   '.gallery-1 .photos img',
+                btnNext:  '.gallery-1 .buttons .next',
+                btnPrev:  '.gallery-1 .buttons .prev',
+                btnStop:  '.gallery-1  input[name = stop]',
+                btnStart: '.gallery-1  input[name = start]'
+            });
+
+            var slider2 = new Gallery({
+                images:   '.gallery-2 .photos img',
+                btnNext:  '.gallery-2 .buttons .next',
+                btnPrev:  '.gallery-2 .buttons .prev',
+                btnStop:  '.gallery-2  input[name = stop]',
+                btnStart: '.gallery-2  input[name = start]'
+            });
+
+        }
 
     </script>
 </head>
@@ -228,7 +239,7 @@
 <div class="summator">
     <div class="wrapper">
 
-        <div class="gallery">
+        <div class="gallery gallery-1">
 
             <div class="photos">
                 <img src="img/_look_out.jpg" class="showed"/>
@@ -246,6 +257,22 @@
                 <input type="button" value="Stop!" name="stop" class="g-item"></div>
 
         </div>
+
+
+        <div class="gallery gallery-2">
+
+            <div class="photos">
+                <img src="img/uznik_razuma_prisoner_of_the_mind.jpg" class="showed"/>
+                <img src="img/space_jokey.jpg"/>
+                <img src="img/sloupok.jpg"/>
+            </div>
+            <div class="buttons"><input type="button" value="Предыдущая" name="prev" class="g-item prev">
+                <input type="button" value="Следующая" name="next" class="g-item next">
+                <input type="button" value="Start slide" name="start" class="g-item">
+                <input type="button" value="Stop!" name="stop" class="g-item"></div>
+
+        </div>
+
     </div>
 </div>
 </body>
