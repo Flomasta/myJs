@@ -172,7 +172,7 @@
                 i = 0;
 
 
-                function next() {
+                this.next = function () {
                     gal.images[i].classList.remove('showed');
                     i++;
                     if (i >= gal.images.length) {
@@ -181,7 +181,7 @@
                     gal.images[i].classList.add('showed');
                 }
 
-                function prev() {
+                this.prev = function () {
                     gal.images[i].classList.remove('showed');
                     i--;
                     if (i < 0) {
@@ -190,7 +190,7 @@
                     gal.images[i].classList.add('showed');
                 };
 
-                function start() {
+                this.start = function () {
                     gal.intervalId = setInterval(function () {
                         gal.images[i].classList.remove('showed');
                         i++;
@@ -202,15 +202,15 @@
                     }, 2000);
                 };
 
-                function stop() {
+                this.stop = function () {
                     clearInterval(gal.intervalId);
                 };
 
 
-                gal.btnNext.onclick = next;
-                gal.btnPrev.onclick = prev;
-                gal.btnStart.onclick = start;
-                gal.btnStop.onclick = stop;
+                gal.btnNext.onclick = this.next;
+                gal.btnPrev.onclick = this.prev;
+                gal.btnStart.onclick = this.start;
+                gal.btnStop.onclick = this.stop;
             };
 
 
