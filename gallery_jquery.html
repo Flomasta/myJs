@@ -91,9 +91,15 @@
             btnStart = $('.start'),
             btnStop = $('.stop'),
             setInter,
+            isRun = false,
             i = 0;
 
         btnNext.on('click', function () {
+
+            if(isRun){
+                return;
+            }
+            isRun = true;
             img.eq(i).animate({left: '100%'}, 1000);
             i++;
             if (img.length <= i) {
@@ -102,16 +108,27 @@
             img.eq(i).css({
                 opacity: 1,
                 left: '-100%'
-            }).animate({left: '0'}, 1000);
+            }).animate({left: '0'}, 1000,function () {
+                isRun = false;
+            });
         });
+
         btnPrev.on('click', function () {
+            if(isRun){
+                return;
+            }
+            isRun = true;
             img.eq(i).animate({left: '-100%'}, 1000);
             i--;
             if (i < 0) {
                 i = img.length - 1;
             }
-            img.eq(i).css({opacity: 1, left: '100%'}).animate({left: '0'}, 1000)
+            img.eq(i).css({opacity: 1, left: '100%'}).animate({left: '0'}, 1000,function () {
+                isRun = false;
+            })
         });
+
+
         btnStart.on('click', function () {
             setInter = setInterval(function () {
                 img.eq(i).animate({left: '100%'}, 1000);
