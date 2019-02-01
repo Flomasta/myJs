@@ -6,6 +6,10 @@
     <title>Title</title>
     <script src='jquery.js'></script>
     <style>
+        body {
+            background-color: rgba(8, 133, 141, 0.76);
+        }
+
         .wrapper {
             width: 900px;
             margin: 0 auto;
@@ -13,6 +17,12 @@
 
         .gallery {
             display: flex;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 25px;
+            box-shadow: 0 0 20px #314241;
+            background-color: rgba(124, 51, 39, 0.79);
+            margin-top: 100px;
         }
 
         .photos img {
@@ -33,6 +43,7 @@
             width: 150px;
             border-radius: 40px;
             outline: none;
+            background-color: #faf6ea;
         }
 
         img {
@@ -44,6 +55,10 @@
         img.showed {
             opacity: 1;
 
+        }
+
+        input[type="button"]:hover {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -58,7 +73,8 @@
                 <img src="img/space_jokey.jpg"/>
                 <img src="img/sloupok.jpg"/>
             </div>
-            <div class="buttons"><input type="button" value="Предыдущая" name="prev" class="g-item prev">
+            <div class="buttons">
+                <input type="button" value="Предыдущая" name="prev" class="g-item prev">
                 <input type="button" value="Следующая" name="next" class="g-item next">
                 <input type="button" value="Start slide" name="start" class="g-item start">
                 <input type="button" value="Stop!" name="stop" class="g-item stop"></div>
@@ -77,34 +93,37 @@
             setInter,
             i = 0;
 
-
         btnNext.on('click', function () {
-            img.eq(i).removeClass('showed');
+            img.eq(i).animate({left: '100%'}, 1000);
             i++;
             if (img.length <= i) {
                 i = 0;
             }
-            img.eq(i).addClass('showed');
+            img.eq(i).css({
+                opacity: 1,
+                left: '-100%'
+            }).animate({left: '0'}, 1000);
         });
-
         btnPrev.on('click', function () {
-            img.eq(i).removeClass('showed');
+            img.eq(i).animate({left: '-100%'}, 1000);
             i--;
             if (i < 0) {
                 i = img.length - 1;
             }
-            img.eq(i).addClass('showed');
+            img.eq(i).css({opacity: 1, left: '100%'}).animate({left: '0'}, 1000)
         });
-
         btnStart.on('click', function () {
-           setInter = setInterval(function () {
-               img.eq(i).removeClass('showed');
-               i++;
-               if (img.length <= i) {
-                   i = 0;
-               }
-               img.eq(i).addClass('showed');
-           },1500);
+            setInter = setInterval(function () {
+                img.eq(i).animate({left: '100%'}, 1000);
+                i++;
+                if (img.length <= i) {
+                    i = 0;
+                }
+                img.eq(i).css({
+                    opacity: 1,
+                    left: '-100%'
+                }).animate({left: '0'}, 1000);
+            }, 3000);
         });
 
         btnStop.on('click', function () {
